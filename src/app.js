@@ -9,7 +9,10 @@ const cors = require('cors')
 
 
 // Importamos las rutas
-const routes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
+const estadoRoutes = require('./routes/estadoRoutes'); // Importar rutas de estados
+const municipioRoutes = require('./routes/municipioRoutes'); // Importar rutas de municipios
+const simpatizanteRoutes = require('./routes/simpatizanteRoutes'); // Importar rutas de municipios
 // Llamamos a express para poder crear el servidor
 var app = express();
 //un metodo que se ejecuta antes que llegue a un controlador
@@ -19,6 +22,9 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors())
 // Cargamos las rutas
-app.use('/api', routes);
+app.use('/api', userRoutes); // Usar las rutas de User
+app.use('/api', estadoRoutes); // Usar las rutas de estados
+app.use('/api', municipioRoutes); // Usar las rutas de municipios
+app.use('/api', simpatizanteRoutes);  // Usar las rutas de simoatizantes
 // exportamos este módulo para poder usar la variable app fuera de este archivo
 module.exports = app;

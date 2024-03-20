@@ -4,14 +4,22 @@ const userSchema = new mongoose.Schema({
   nombre: String,
   apellidoPaterno: String,
   apellidoMaterno: String,
-  email: String,
+  genero: Number,
+  telefono: String,
+  email: String,  
   fechaNacimiento: Date,
-  estado: String,
-  municipio: String,
+  estado: Number,
+  municipio: Number,
   codigoPostal: String,
   colonia: String,
   comentarioPersonal: String,
+  estatus: Number,
+  tipoCuenta: Number,
+  password: String,
+  fechaRegistro: Date
+
 });
+
 
 const User = mongoose.model('User', userSchema);
 
