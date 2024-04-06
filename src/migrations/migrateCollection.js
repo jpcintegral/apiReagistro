@@ -9,12 +9,9 @@ async function migrateCollection() {
 
         // Verificar si los campos ya existen en el esquema
         const camposExisten = userSchema.obj.hasOwnProperty('estatus') &&
-            userSchema.obj.hasOwnProperty('tipoCuenta') &&
-            userSchema.obj.hasOwnProperty('comentarioPersonal') &&
-            userSchema.obj.hasOwnProperty('genero') &&
-            userSchema.obj.hasOwnProperty('telefono') &&
-            userSchema.obj.hasOwnProperty('password') &&
-            userSchema.obj.hasOwnProperty('fechaRegistro');
+            userSchema.obj.hasOwnProperty('imgElectorFrontal') &&
+            userSchema.obj.hasOwnProperty('imgElectorTracera') &&
+            userSchema.obj.hasOwnProperty('curp') ;
 
         // Si los campos no existen en el esquema, realizar la actualización
         if (!camposExisten) {
@@ -22,7 +19,7 @@ async function migrateCollection() {
             const collection = mongoose.connection.db.collection(User.collection.name);
 
             // Realizar la actualización de la estructura de la colección
-            await collection.updateMany({}, { $set: { estatus: 1, tipoCuenta: 1, comentarioPersonal: "", genero: 1, telefono: "" ,estado: 6,municipio:3,password: "", fechaRegistro: Date} });
+            await collection.updateMany({}, { $set: { imgElectorFrontal : "",  imgElectorTracera : "", curp:"" }});
 
             console.log('Migración completada exitosamente.');
         } else {

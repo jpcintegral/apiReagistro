@@ -3,13 +3,15 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
+require('dotenv').config();
 
-const secretKey = 'jp152024'; // Cambia esto por tu propia clave secreta para JWT
 
 exports.login = async (req, res) => {
   try {
+    const secretKey = process.env.APP_SECRET_KEY; 
     const token = req.body.token; // Aquí asumo que el token JWT se pasa en el cuerpo de la solicitud
     console.error('Body:', req.body);
+    console.log('key:',process.env.APP_SECRET_KEY);
     // Verificar si el token está presente
     if (!token) {
       return res.status(400).json({ error: 'Token no proporcionado' });

@@ -24,8 +24,11 @@ exports.createSimpatizante = async (req, res) => {
       claveElector,
       folio,
       vigenciaCredencial,
+      curp,
       lat,
-      lon
+      lon,
+      imgElectorFrontal,
+      imgElectorTrasera
     } = req.body;
 
     // Crear un nuevo objeto Simpatizante utilizando el modelo
@@ -49,10 +52,13 @@ exports.createSimpatizante = async (req, res) => {
       estatus: 1,
       localidad,
       claveElector,
+      curp,
       folio,
       vigenciaCredencial,
       lat,
       lon,
+      imgElectorFrontal,
+      imgElectorTrasera,
       fechaRegistro: new Date()
     });
 

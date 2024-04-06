@@ -16,9 +16,10 @@ const simpatizanteRoutes = require('./routes/simpatizanteRoutes'); // Importar r
 // Llamamos a express para poder crear el servidor
 var app = express();
 //un metodo que se ejecuta antes que llegue a un controlador
-//Configuramos bodyParser para que convierta el body de nuestras peticiones a JSON
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
+// Configuramos body-parser para que convierta el body de nuestras peticiones a JSON
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '50mb' })); // Aquí aumentamos el límite de tamaño de carga útil a 50 megabytes
+
 app.use(express.json());
 app.use(cors())
 // Cargamos las rutas

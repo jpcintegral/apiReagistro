@@ -21,10 +21,13 @@ const SimpatizanteSchema = new mongoose.Schema({
   seccion: String,
   localidad: String,
   claveElector: String,
+  curp: String,
   folio: String,
   vigenciaCredencial: Number,
   lat: String,
   lon: String, 
+  imgElectorFrontal : String,
+  imgElectorTracera : String,
   fechaRegistro: Date
 
 });
