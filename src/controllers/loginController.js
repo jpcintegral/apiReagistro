@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
 
     // Si el usuario y la contraseña son válidos, devuelve el perfil del usuario
     
-    res.json({ perfil: user.tipoCuenta, nombreCompleto: `${user.nombre} ${user.apellidoPaterno} ${user.apellidoMaterno}` });
+    res.json({ user:user._id, perfil: user.tipoCuenta, nombreCompleto: `${user.nombre} ${user.apellidoPaterno} ${user.apellidoMaterno}` });
 
   } catch (error) {
     console.error('Error en el controlador de inicio de sesión:', error);
