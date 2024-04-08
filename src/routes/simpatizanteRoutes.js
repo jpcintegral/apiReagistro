@@ -18,6 +18,6 @@ router.put('/simpatizantes/:id', simpatizanteController.updateSimpatizanteById);
 router.delete('/simpatizantes/:id', simpatizanteController.deleteSimpatizanteById);
 
 // Ruta para desactivar un simpatizante por ID
-router.put('/simpatizantes/desactivar/:id', simpatizanteController.desactivarSimpatizanteById);
+router.put('/simpatizantes/desactivar/:id/:userBaja', simpatizanteController.desactivarSimpatizanteById);
 
 module.exports = router;

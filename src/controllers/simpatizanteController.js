@@ -28,7 +28,8 @@ exports.createSimpatizante = async (req, res) => {
       lat,
       lon,
       imgElectorFrontal,
-      imgElectorTrasera
+      imgElectorTrasera,
+      idUsuarioAlta,
     } = req.body;
 
     // Crear un nuevo objeto Simpatizante utilizando el modelo
@@ -59,6 +60,7 @@ exports.createSimpatizante = async (req, res) => {
       lon,
       imgElectorFrontal,
       imgElectorTrasera,
+      idUsuarioAlta,
       fechaRegistro: new Date()
     });
 
@@ -103,6 +105,8 @@ exports.updateSimpatizanteById = async (req, res) => {
   try {
     const { id } = req.params;
     const updatedFields = req.body;
+  // Añadir la fecha de actualización
+    updatedFields.fechaUpdate = new Date(); // Obtener la fecha actual y convertirla en un objeto Date
 
     const simpatizanteUpdated = await Simpatizante.findByIdAndUpdate(id, updatedFields, { new: true });
     if (!simpatizanteUpdated) {
@@ -134,11 +138,11 @@ exports.deleteSimpatizanteById = async (req, res) => {
 
 exports.desactivarSimpatizanteById = async (req, res) => {
     try {
-      const { id } = req.params;
+      const { id,userBaja } = req.params;
       
       const simpatizanteUpdated = await Simpatizante.findByIdAndUpdate(
         id,
-        { $set: { estatus: 2 } },
+        { $set: { estatus: 2  ,fechaBaja : new Date() ,idUsuarioBaja: userBaja} },
         { new: true }
       );
   

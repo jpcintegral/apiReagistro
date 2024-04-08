@@ -28,7 +28,12 @@ const SimpatizanteSchema = new mongoose.Schema({
   lon: String, 
   imgElectorFrontal : String,
   imgElectorTracera : String,
-  fechaRegistro: Date
+  idUsuarioAlta: String,
+  idUsuarioBaja: String,
+  idUsuarioUpdate: String,
+  fechaRegistro: Date,
+  fechaBaja: Date,
+  fechaUpdate: Date,
 
 });
 
