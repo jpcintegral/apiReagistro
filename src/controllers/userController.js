@@ -20,6 +20,7 @@ const createUser = async (req, res) => {
       comentarioPersonal,
       estatus,
       tipoCuenta,
+      idUsuarioAlta,
       } = req.body;
 
       const fechaNacimientoDate = new Date(fechaNacimiento);
@@ -44,6 +45,8 @@ const createUser = async (req, res) => {
       tipoCuenta,
       password,
       fechaRegistro,
+      idUsuarioAlta,
+      fechaRegistro: new Date()
     });
 
     // Guardar el nuevo perfil en la base de datos
@@ -107,6 +110,7 @@ const updateUserId = async (req, res) => {
       estatus,
       tipoCuenta,
       password,
+      idUsuarioUpdate,
     } = req.body;
 
     const userUpdated = await User.findByIdAndUpdate(
@@ -126,7 +130,9 @@ const updateUserId = async (req, res) => {
       comentarioPersonal,
       estatus,
       tipoCuenta,
-      password
+      password,
+      idUsuarioUpdate,
+      fechaUpdate: new Date()
       },
       { new: true }
     );
@@ -159,8 +165,8 @@ const deleteUserPorId = async (req, res) => {
 
 const  desactivarUserById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const userDesactivado = await User.findByIdAndUpdate(id, { estatus: 2 });
+    const { id ,userBaja} = req.params;
+    const userDesactivado = await User.findByIdAndUpdate(id, { estatus: 2 ,fechaBaja : new Date() ,idUsuarioBaja: userBaja });
 
     if (!userDesactivado) {
       return res.status(404).json({ error: 'Usuario no encontrado' });

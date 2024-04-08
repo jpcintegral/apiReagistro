@@ -15,7 +15,7 @@ router.get('/user/:id', userController.getUserPorId);
 // Ruta para actualizar un perfil por ID
 router.put('/user/:id', userController.updateUserId);
 
-router.put('/user/desactivar/:id', userController.desactivarUserById);
+router.put('/user/desactivar/:id/:userBaja', userController.desactivarUserById);
 
 // Ruta para eliminar un perfil por ID
 router.delete('/user/:id', userController.deleteUserPorId);

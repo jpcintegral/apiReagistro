@@ -16,7 +16,12 @@ const userSchema = new mongoose.Schema({
   estatus: Number,
   tipoCuenta: Number,
   password: String,
-  fechaRegistro: Date
+  fechaRegistro: Date,
+  idUsuarioAlta: String,
+  idUsuarioBaja: String,
+  idUsuarioUpdate: String,
+  fechaBaja: Date,
+  fechaUpdate: Date,
 
 });
 
