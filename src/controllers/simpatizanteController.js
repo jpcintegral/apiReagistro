@@ -85,6 +85,18 @@ exports.getSimpatizantes = async (req, res) => {
   }
 };
 
+
+// Controlador para obtener todos los simpatizantes activos excluyendo las imágenes
+exports.getActiveSimpatizantesExcludingImages = async (req, res) => {
+  try {
+    const simpatizantes = await Simpatizante.find({ estatus: 1 }).select('-imgElectorTracera -imgElectorFrontal');
+    res.json(simpatizantes);
+  } catch (error) {
+    console.error('Error al obtener los simpatizantes:', error);
+    res.status(500).json({ error: 'Error al obtener los simpatizantes' });
+  }
+};
+
 // Controlador para obtener un simpatizante por ID
 exports.getSimpatizanteById = async (req, res) => {
   try {
@@ -154,5 +166,25 @@ exports.desactivarSimpatizanteById = async (req, res) => {
     } catch (error) {
       console.error('Error al desactivar el simpatizante:', error);
       res.status(500).json({ error: 'Error al desactivar el simpatizante' });
+    }
+  };
+
+  exports.getSimpatizantesByFiltersMapa = async (req, res) => {
+    try {
+      const filters = req.query;
+  
+      // Construir el objeto de consulta dinámicamente
+      let query = {};
+      for (const key in filters) {
+        if (filters[key]) {
+          query[key] = filters[key];
+        }
+      }
+  
+      const simpatizantes = await Simpatizante.find(query);
+      res.json(simpatizantes);
+    } catch (error) {
+      console.error('Error al obtener los simpatizantes:', error);
+      res.status(500).json({ error: 'Error al obtener los simpatizantes' });
     }
   };

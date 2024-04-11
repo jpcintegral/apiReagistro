@@ -8,10 +8,10 @@ async function migrateCollection() {
         const userSchema = userModel.schema;
 
         // Verificar si los campos ya existen en el esquema
-        const camposExisten = userSchema.obj.hasOwnProperty('estatus') &&
-            userSchema.obj.hasOwnProperty('imgElectorFrontal') &&
-            userSchema.obj.hasOwnProperty('imgElectorTracera') &&
-            userSchema.obj.hasOwnProperty('curp') ;
+        const camposExisten = userSchema.obj.hasOwnProperty('idUsuarioUpdate') &&
+            userSchema.obj.hasOwnProperty('fechaBaja') &&
+            userSchema.obj.hasOwnProperty('idUsuarioBaja') &&
+            userSchema.obj.hasOwnProperty('fechaUpdate');
 
         // Si los campos no existen en el esquema, realizar la actualización
         if (!camposExisten) {
@@ -19,7 +19,8 @@ async function migrateCollection() {
             const collection = mongoose.connection.db.collection(User.collection.name);
 
             // Realizar la actualización de la estructura de la colección
-            await collection.updateMany({}, { $set: { imgElectorFrontal : "",  imgElectorTracera : "", curp:"" }});
+    
+            await collection.updateMany({}, { $set: { idUsuarioBaja: "", idUsuarioUpdate : "",  fechaBaja : null,fechaUpdate:null}});
 
             console.log('Migración completada exitosamente.');
         } else {
