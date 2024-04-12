@@ -8,6 +8,12 @@ router.post('/simpatizantes', simpatizanteController.createSimpatizante);
 // Ruta para obtener todos los simpatizantes
 router.get('/simpatizantes', simpatizanteController.getSimpatizantes);
 
+// Ruta para obtener todos los simpatizantes sin las imagenes
+ router.get('/getActiveSimpatizantesExcludingImages',simpatizanteController.getActiveSimpatizantesExcludingImages);
+
+// Ruta para obtener filtros del mapa
+router.get('/simpatizantes/filtrosMapa', simpatizanteController.getSimpatizantesByFiltersMapa);
+
 // Ruta para obtener un simpatizante por ID
 router.get('/simpatizantes/:id', simpatizanteController.getSimpatizanteById);
 
