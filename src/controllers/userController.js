@@ -1,6 +1,7 @@
 
 
 const User = require('../models/userModel')
+const authenticateToken = require('../helper/authMiddleware');
 
 // Controlador para crear un nuevo perfil
 const createUser = async (req, res) => {
@@ -132,11 +133,11 @@ const deleteUserPorId = async (req, res) => {
 };
 
 module.exports = {
-    createUser,
-    getUsers,
-    getUserPorId,
-    updateUserId,
-    deleteUserPorId,
+  createUser: [authenticateToken, createUser],
+  getUsers: [authenticateToken, getUsers],
+  getUserPorId: [authenticateToken, getUserPorId],
+  updateUserId: [authenticateToken, updateUserId],
+  deleteUserPorId: [authenticateToken, deleteUserPorId],
+  desactivarUserById: [authenticateToken, desactivarUserById]
 };
-
 
