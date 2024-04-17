@@ -1,7 +1,7 @@
 const Simpatizante = require('../models/simpatizante');
-
+const authenticateToken = require('../helper/authMiddleware');
 // Controlador para crear un nuevo simpatizante
-exports.createSimpatizante = async (req, res) => {
+const createSimpatizante = async (req, res) => {
   try {
     const {
       nombre,
@@ -75,7 +75,7 @@ exports.createSimpatizante = async (req, res) => {
 };
 
 // Controlador para obtener todos los simpatizantes
-exports.getSimpatizantes = async (req, res) => {
+const getSimpatizantes = async (req, res) => {
   try {
     const simpatizantes = await Simpatizante.find({ estatus: 1 });
     res.json(simpatizantes);
@@ -87,7 +87,7 @@ exports.getSimpatizantes = async (req, res) => {
 
 
 // Controlador para obtener todos los simpatizantes activos excluyendo las imágenes
-exports.getActiveSimpatizantesExcludingImages = async (req, res) => {
+const getActiveSimpatizantesExcludingImages = async (req, res) => {
   try {
     const simpatizantes = await Simpatizante.find({ estatus: 1 }).select('-imgElectorTracera -imgElectorFrontal');
     res.json(simpatizantes);
@@ -98,7 +98,7 @@ exports.getActiveSimpatizantesExcludingImages = async (req, res) => {
 };
 
 // Controlador para obtener un simpatizante por ID
-exports.getSimpatizanteById = async (req, res) => {
+const getSimpatizanteById = async (req, res) => {
   try {
     const { id } = req.params;
     const simpatizante = await Simpatizante.findById(id);
@@ -113,7 +113,7 @@ exports.getSimpatizanteById = async (req, res) => {
 };
 
 // Controlador para actualizar un simpatizante por ID
-exports.updateSimpatizanteById = async (req, res) => {
+const updateSimpatizanteById = async (req, res) => {
   try {
     const { id } = req.params;
     const updatedFields = req.body;
@@ -132,7 +132,7 @@ exports.updateSimpatizanteById = async (req, res) => {
 };
 
 // Controlador para eliminar un simpatizante por ID
-exports.deleteSimpatizanteById = async (req, res) => {
+const deleteSimpatizanteById = async (req, res) => {
   try {
     const { id } = req.params;
     const simpatizanteDeleted = await Simpatizante.findByIdAndDelete(id);
@@ -148,7 +148,7 @@ exports.deleteSimpatizanteById = async (req, res) => {
   }
 };
 
-exports.desactivarSimpatizanteById = async (req, res) => {
+ const desactivarSimpatizanteById = async (req, res) => {
     try {
       const { id,userBaja } = req.params;
       
@@ -169,7 +169,7 @@ exports.desactivarSimpatizanteById = async (req, res) => {
     }
   };
 
-  exports.getSimpatizantesByFiltersMapa = async (req, res) => {
+  const getSimpatizantesByFiltersMapa = async (req, res) => {
     try {
       const filters = req.query;
   
@@ -188,3 +188,15 @@ exports.desactivarSimpatizanteById = async (req, res) => {
       res.status(500).json({ error: 'Error al obtener los simpatizantes' });
     }
   };
+  module.exports = {
+    createSimpatizante: [authenticateToken, createSimpatizante],
+    getSimpatizantes: [authenticateToken, getSimpatizantes],
+    getActiveSimpatizantesExcludingImages: [authenticateToken, getActiveSimpatizantesExcludingImages],
+    getSimpatizanteById: [authenticateToken, getSimpatizanteById],
+    updateSimpatizanteById: [authenticateToken, updateSimpatizanteById],
+    deleteSimpatizanteById: [authenticateToken, deleteSimpatizanteById],
+    desactivarSimpatizanteById: [authenticateToken, desactivarSimpatizanteById],
+    getSimpatizantesByFiltersMapa: [authenticateToken, getSimpatizantesByFiltersMapa],
+    
+  };
+  
